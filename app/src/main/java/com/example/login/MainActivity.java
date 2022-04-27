@@ -17,10 +17,12 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
     }
 
 
-    public void login(View view) {
+      public void login(View view) {
         Intent switchActivityIntent = new Intent(this, PantallaPrincipal.class);
         startActivity(switchActivityIntent);
     }
