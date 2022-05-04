@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "614712021194",
+    "project_id": "projecte-fi-curs",
+    "storage_bucket": "projecte-fi-curs.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:614712021194:android:17089356952a34c95be433",
+        "android_client_info": {
+          "package_name": "com.example.login"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "614712021194-ocis48468j873bj9v0jv4lguts4hqifu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeWGHgxT0qslWsWLjrcexBtTWTjG6_95g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "614712021194-ocis48468j873bj9v0jv4lguts4hqifu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

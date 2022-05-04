@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Login">
         <activity
+            android:name=".Portfoli"
+            android:exported="true" />
+        <activity
             android:name=".PantallaRegistre"
             android:exported="true" />
         <activity

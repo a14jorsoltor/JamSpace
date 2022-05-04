@@ -1,21 +1,53 @@
 package com.example.login;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.HashMap;
+import java.util.Map;
+
+
 public class PantallaRegistre extends AppCompatActivity {
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private static final String LOG_TAG = null;
+    long id = 0;
+    TextView msgError;
+    EditText nomUsuari, correuUsuari, pswUsuari;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_registre);
-        Toast.makeText(getApplicationContext(),"Pantalla registre",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Pantalla registre", Toast.LENGTH_SHORT).show();
+        setUp();
 
+    }
 
+    private void setUp() {
+        msgError = findViewById(R.id.tvMsgError);
+        nomUsuari = findViewById(R.id.etNomReg);
+        correuUsuari = findViewById(R.id.etCorreu);
+        pswUsuari = findViewById(R.id.etContrasenya);
     }
 
     public void returnLogin(View view) {
@@ -24,6 +56,71 @@ public class PantallaRegistre extends AppCompatActivity {
     }
 
     public void Register(View view) {
-        //Aqui van guardar les dades en el firebase
+/*
+        if (nomUsuari.getText().toString().equals("") && correuUsuari.getText().toString().equals("") && pswUsuari.getText().toString().equals("")) {
+
+            if (nomUsuari.getText().toString().equals("")) {
+                msgError.setText(msgError.getText() + " Has de ficiar un nom d'usuari");
+            }
+            if (correuUsuari.getText().toString().equals("")) {
+                msgError.setText(msgError.getText() + " Has de ficiar un correu");
+            }
+            if (pswUsuari.getText().toString().equals("")) {
+                pswUsuari.setText(msgError.getText() + " Has de ficiar una contrasenya");
+            }
+
+        } else {
+
+
+            getIdDoc(db, "id");
+
+            Map<String, Object> usuari = new HashMap<>();
+            usuari.put("id", ++id);
+            usuari.put("username", nomUsuari.getText().toString());
+            usuari.put("userMail", correuUsuari.getText().toString());
+            usuari.put("password", pswUsuari.getText().toString());
+
+// Add a new document with a generated ID
+            db.collection("Usuaris").document("Comanda " + id)
+                    .set(usuari)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Log.d(LOG_TAG, "DocumentSnapshot successfully written!");
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w(LOG_TAG, "Error writing document", e);
+                        }
+                    });
+
+        }
+*/
     }
+
+    public void getIdDoc(FirebaseFirestore db, String idNom) {
+
+
+        CollectionReference lastDoc = db.collection("Comanda");
+
+        lastDoc.orderBy("ID", Query.Direction.DESCENDING).limit(1).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        id = (Long) document.get(idNom);
+
+                    }
+                } else {
+                    Log.w(LOG_TAG, "Error getting documents.", task.getException());
+                }
+
+            }
+        });
+
+    }
+
+
 }
