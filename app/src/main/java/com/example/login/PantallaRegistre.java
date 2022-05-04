@@ -46,8 +46,8 @@ public class PantallaRegistre extends AppCompatActivity {
     private void setUp() {
         msgError = findViewById(R.id.tvMsgError);
         nomUsuari = findViewById(R.id.etNomReg);
-        correuUsuari = findViewById(R.id.etCorreu);
-        pswUsuari = findViewById(R.id.etContrasenya);
+        correuUsuari = findViewById(R.id.etCorreuReg);
+        pswUsuari = findViewById(R.id.etContrasenyaReg);
     }
 
     public void returnLogin(View view) {
@@ -56,23 +56,23 @@ public class PantallaRegistre extends AppCompatActivity {
     }
 
     public void Register(View view) {
-/*
-        if (nomUsuari.getText().toString().equals("") && correuUsuari.getText().toString().equals("") && pswUsuari.getText().toString().equals("")) {
 
+        if (nomUsuari.getText().toString().equals("") || correuUsuari.getText().toString().equals("") || pswUsuari.getText().toString().equals("")) {
+            msgError.setText("");
             if (nomUsuari.getText().toString().equals("")) {
-                msgError.setText(msgError.getText() + " Has de ficiar un nom d'usuari");
+                msgError.setText("Has de ficiar un nom d'usuari\n");
             }
             if (correuUsuari.getText().toString().equals("")) {
-                msgError.setText(msgError.getText() + " Has de ficiar un correu");
+                msgError.setText(msgError.getText() + "Has de ficiar un correu\n");
             }
             if (pswUsuari.getText().toString().equals("")) {
-                pswUsuari.setText(msgError.getText() + " Has de ficiar una contrasenya");
+                msgError.setText(msgError.getText() + "Has de ficiar una contrasenya\n");
             }
 
         } else {
-
-
+            Log.d(LOG_TAG, "Correu " + correuUsuari.getText());
             getIdDoc(db, "id");
+
 
             Map<String, Object> usuari = new HashMap<>();
             usuari.put("id", ++id);
@@ -81,7 +81,7 @@ public class PantallaRegistre extends AppCompatActivity {
             usuari.put("password", pswUsuari.getText().toString());
 
 // Add a new document with a generated ID
-            db.collection("Usuaris").document("Comanda " + id)
+            db.collection("Usuaris").document("usuari " + id)
                     .set(usuari)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -97,13 +97,13 @@ public class PantallaRegistre extends AppCompatActivity {
                     });
 
         }
-*/
+
     }
 
     public void getIdDoc(FirebaseFirestore db, String idNom) {
 
 
-        CollectionReference lastDoc = db.collection("Comanda");
+        CollectionReference lastDoc = db.collection("Usuaris");
 
         lastDoc.orderBy("ID", Query.Direction.DESCENDING).limit(1).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override

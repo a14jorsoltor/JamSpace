@@ -18,18 +18,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/etCorreu"
+        android:id="@+id/etUserNamein"
         android:layout_width="200dp"
         android:layout_height="40dp"
         android:layout_marginTop="132dp"
-        android:hint="Correu electronic"
+        android:hint="Nom d'usuari"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTtiolApp" />
 
     <EditText
-        android:id="@+id/etContrasenya"
+        android:id="@+id/etContrasenyain"
         android:layout_width="200dp"
         android:layout_height="40dp"
         android:layout_marginTop="72dp"
@@ -38,7 +38,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etCorreu" />
+        app:layout_constraintTop_toBottomOf="@+id/etUserNamein" />
 
     <Button
         android:id="@+id/btLogin"
@@ -50,7 +50,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etContrasenya"
+        app:layout_constraintTop_toBottomOf="@+id/etContrasenyain"
         tools:ignore="OnClick" />
 
     <Button
@@ -63,6 +63,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etContrasenya"
+        app:layout_constraintTop_toBottomOf="@+id/etContrasenyain"
         tools:ignore="OnClick" />
 </androidx.constraintlayout.widget.ConstraintLayout>

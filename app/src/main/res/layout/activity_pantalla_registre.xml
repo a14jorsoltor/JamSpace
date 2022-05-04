@@ -9,8 +9,8 @@
 
     <TextView
         android:id="@+id/tvTitol"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Registre"
         android:textAlignment="center"
@@ -82,8 +82,9 @@
 
     <TextView
         android:id="@+id/tvMsgError"
-        android:layout_width="260dp"
-        android:layout_height="72dp"
+        android:textColor="@color/design_default_color_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
