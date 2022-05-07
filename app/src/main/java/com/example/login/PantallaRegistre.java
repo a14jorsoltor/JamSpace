@@ -15,11 +15,15 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,11 +32,22 @@ import java.util.Map;
 public class PantallaRegistre extends AppCompatActivity {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseAuth mAuth;
+
+
     private static final String LOG_TAG = null;
     long id = 0;
     TextView msgError;
     EditText nomUsuari, correuUsuari, pswUsuari;
 
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +59,8 @@ public class PantallaRegistre extends AppCompatActivity {
     }
 
     private void setUp() {
+
+        mAuth = FirebaseAuth.getInstance();
         msgError = findViewById(R.id.tvMsgError);
         nomUsuari = findViewById(R.id.etNomReg);
         correuUsuari = findViewById(R.id.etCorreuReg);
@@ -70,7 +87,11 @@ public class PantallaRegistre extends AppCompatActivity {
             }
 
         } else {
-            Log.d(LOG_TAG, "Correu " + correuUsuari.getText());
+
+            authenticarUsuari(correuUsuari.getText().toString(), pswUsuari.getText().toString());
+
+
+
             getIdDoc(db, "id");
 
 
@@ -98,6 +119,30 @@ public class PantallaRegistre extends AppCompatActivity {
 
         }
 
+    }
+
+    private void authenticarUsuari(String email, String password) {
+
+
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(LOG_TAG, "createUserWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(LOG_TAG, "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(PantallaRegistre.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+
+                        }
+
+                        // ...
+                    }
+                });
     }
 
     public void getIdDoc(FirebaseFirestore db, String idNom) {
