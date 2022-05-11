@@ -5,21 +5,31 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 public class MainActivity extends AppCompatActivity {
-    EditText userNamein, passWordin;
-    int numUser = 0;
-    boolean loginUsername = false, loginPassword = false, loginSuccessfull = false;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    EditText userMailin, passWordin;
+    boolean loginSuccessfull = false;
+    private FirebaseAuth mAuth;
+    private static final String LOG_TAG = null;
+
+    public boolean isLoginSuccessfull() {
+        return loginSuccessfull;
+    }
+
+    public void setLoginSuccessfull(boolean loginSuccessfull) {
+        this.loginSuccessfull = loginSuccessfull;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,74 +43,60 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUp() {
-        userNamein = findViewById(R.id.etUserNamein);
+        mAuth = FirebaseAuth.getInstance();
+        userMailin = findViewById(R.id.etCorreuLogin);
         passWordin = findViewById(R.id.etContrasenyain);
     }
 
 
     public void login(View view) {
+        if (!userMailin.getText().toString().equals("") || !passWordin.getText().toString().equals("")) {
+            Log.d(LOG_TAG, "CORREU: " + userMailin.getText().toString() + " || " + "PASSWORD: " + passWordin.getText().toString());
 
-
-        String username = userNamein.getText().toString();
-        String password = passWordin.getText().toString();
-
-        if (checkLogin(username, password)) {
-            Intent switchActivityIntent = new Intent(this, PantallaPrincipal.class);
-            startActivity(switchActivityIntent);
-        } else {
-            Toast.makeText(getApplicationContext(), "Credencials malament", Toast.LENGTH_SHORT).show();
-
-        }
-
-    }
-
-    private boolean checkLogin(String username, String password) {
-
-        db.collection("Usuaris")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-
+            mAuth.signInWithEmailAndPassword(userMailin.getText().toString(), passWordin.getText().toString())
+                    .addOnCompleteListener(this, task -> {
                         if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(LOG_TAG, "signInWithEmail:success");
+                            Intent switchActivityIntent = new Intent(this, PantallaPrincipal.class);
+                            startActivity(switchActivityIntent);
 
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-
-
-                                while (!loginPassword) {
-                                    System.out.println(document.getData().get("username"));
-                                    numUser++;
-                                    if (username.equals(document.getData().get("username"))) {
-                                        loginUsername = true;
-                                        System.out.println("USERNAME CORRECTO");
-                                    }
-                                    if (username.equals(document.get("password"))) {
-                                        loginPassword = true;
-                                        System.out.println("PASSWORD CORRECTO");
-                                    }
-                                    if (loginPassword && loginUsername) {
-                                        loginSuccessfull = true;
-                                    } else if (!loginUsername && !loginPassword) {
-                                        loginPassword = false;
-                                        loginUsername = false;
-                                        loginSuccessfull = false;
-                                        System.out.println("PASSWORD O USERNAME INCORRECTOS");
-                                    }
-                                }
-
-                            }
                         } else {
-                            loginSuccessfull = false;
+                            // If sign in fails, display a message to the user.
+                            setLoginSuccessfull(false);
+                            Toast.makeText(getApplicationContext(), "Credencials malament", Toast.LENGTH_SHORT).show();
+
                         }
-                    }
-                });
-        return loginSuccessfull;
+                    });
+        } else {
+            Log.d(LOG_TAG, "NI CORREU NI PWD NO TE RES");
+        }
     }
 
+
+
+    /**
+     * Funcio per verue si les credencials coisidiexen amb les de la base de dades.
+     * @param correu correu que pasa l'usuari
+     * @param password pase que pasa l'usuari
+     * @return retornem si esta be o malament .
+     */
+    private void checkLogin(String correu, String password) {
+        Log.d(LOG_TAG, "CORREU: "+ correu +" || " + "PASSWORD" + password);
+
+
+
+    }
+
+    /**
+     * Canvi de pantalla a la de registre
+     * @param view
+     */
     public void registre(View view) {
         Intent switchActivityIntent = new Intent(this, PantallaRegistre.class);
         startActivity(switchActivityIntent);
     }
+
 
 
 }

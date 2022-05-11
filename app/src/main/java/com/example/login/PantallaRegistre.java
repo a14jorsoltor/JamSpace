@@ -33,12 +33,23 @@ public class PantallaRegistre extends AppCompatActivity {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth mAuth;
+    private boolean goodCredentials = false;
+
 
 
     private static final String LOG_TAG = null;
     long id = 0;
     TextView msgError;
     EditText nomUsuari, correuUsuari, pswUsuari;
+
+    public boolean isGoodCredentials() {
+        return goodCredentials;
+    }
+
+    public void setGoodCredentials(boolean goodCredentials) {
+        this.goodCredentials = goodCredentials;
+    }
+
 
 
     @Override
@@ -67,11 +78,20 @@ public class PantallaRegistre extends AppCompatActivity {
         pswUsuari = findViewById(R.id.etContrasenyaReg);
     }
 
+    /**
+     * Funcio per retornar a la pantalla login
+     * @param view
+     */
     public void returnLogin(View view) {
         Intent switchActivityIntent = new Intent(this, MainActivity.class);
         startActivity(switchActivityIntent);
     }
 
+
+    /**
+     * Funcio per fe el registre de la persona
+     * @param view
+     */
     public void Register(View view) {
 
         if (nomUsuari.getText().toString().equals("") || correuUsuari.getText().toString().equals("") || pswUsuari.getText().toString().equals("")) {
@@ -91,7 +111,6 @@ public class PantallaRegistre extends AppCompatActivity {
             authenticarUsuari(correuUsuari.getText().toString(), pswUsuari.getText().toString());
 
 
-
             getIdDoc(db, "id");
 
 
@@ -99,9 +118,7 @@ public class PantallaRegistre extends AppCompatActivity {
             usuari.put("id", ++id);
             usuari.put("username", nomUsuari.getText().toString());
             usuari.put("userMail", correuUsuari.getText().toString());
-            usuari.put("password", pswUsuari.getText().toString());
-
-// Add a new document with a generated ID
+            // Add a new document with a generated ID
             db.collection("Usuaris").document("usuari " + id)
                     .set(usuari)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -121,30 +138,70 @@ public class PantallaRegistre extends AppCompatActivity {
 
     }
 
+    /**
+     * Aquesta funcio mira si s'han ficat be les credencials, i si es poden ficar be al firebase
+     * @param email email que li pasem a partir del que fica  l'usuari
+     * @param password password que li passa a partir de que fica l'usuari
+     */
     private void authenticarUsuari(String email, String password) {
 
 
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(LOG_TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(LOG_TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(PantallaRegistre.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+        if (password.length() < 6 && (email.equals("") || !email.contains("@"))) {
+            Toast.makeText(PantallaRegistre.this, "Credencials fallidas",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+
+
+            mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d(LOG_TAG, "createUserWithEmail:success");
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                setGoodCredentials(true);
+                                canviPantallaLogin(isGoodCredentials());
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w(LOG_TAG, "createUserWithEmail:failure", task.getException());
+                                Toast.makeText(PantallaRegistre.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                                setGoodCredentials(false);
+
+                            }
+
 
                         }
+                    });
 
-                        // ...
-                    }
-                });
+
+
+
+
+
+
+
+
+        }
     }
 
+
+    private void canviPantallaLogin(boolean goodCredentials) {
+        if(goodCredentials){
+            Intent switchActivityIntent = new Intent(this, PantallaPrincipal.class);
+            startActivity(switchActivityIntent);
+        }
+        else {
+                Toast.makeText(PantallaRegistre.this, "Credencials errones",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+    /**
+     * Funcio per posar una id al seguent fitxer que creem en la base de dades.
+     * @param db
+     * @param idNom
+     */
     public void getIdDoc(FirebaseFirestore db, String idNom) {
 
 

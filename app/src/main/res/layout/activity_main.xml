@@ -17,16 +17,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <EditText
-        android:id="@+id/etUserNamein"
+        android:id="@+id/etCorreuLogin"
         android:layout_width="200dp"
         android:layout_height="40dp"
         android:layout_marginTop="132dp"
-        android:hint="Nom d'usuari"
+        android:hint="Correu"
+        android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTtiolApp" />
+
 
     <EditText
         android:id="@+id/etContrasenyain"
@@ -38,7 +41,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etUserNamein" />
+        app:layout_constraintTop_toBottomOf="@+id/etCorreuLogin" />
 
     <Button
         android:id="@+id/btLogin"
