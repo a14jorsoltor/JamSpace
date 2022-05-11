@@ -18,8 +18,15 @@ public class PantallaPrincipal extends AppCompatActivity {
     }
 
 
+
+
     public void cvPortfoli(View view) {
         Intent switchActivityIntent = new Intent(this, Portfoli.class);
+        startActivity(switchActivityIntent);
+    }
+
+    public void cvEditPost(View view) {
+        Intent switchActivityIntent = new Intent(this, PostEditor.class);
         startActivity(switchActivityIntent);
     }
 }

@@ -27,12 +27,14 @@
             tools:ignore="OnClick" />
 
     </androidx.cardview.widget.CardView>
+
     <Button
         android:id="@+id/upload"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
-
+        android:text="Posar nou post"
+        android:onClick="cvEditPost"
+        tools:ignore="OnClick" />
 
 
 </LinearLayout>

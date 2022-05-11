@@ -58,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(LOG_TAG, "signInWithEmail:success");
+
+
                             Intent switchActivityIntent = new Intent(this, PantallaPrincipal.class);
                             startActivity(switchActivityIntent);
 
