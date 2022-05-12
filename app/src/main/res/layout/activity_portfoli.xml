@@ -7,21 +7,26 @@
     tools:context=".Portfoli">
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="428dp"
         android:layout_height="728dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.333" />
+
     <ImageView
-        android:id="@+id/backgroundImage"
-        android:layout_width="419dp"
-        android:layout_height="505dp"
-        android:background="@drawable/gba"
+        android:id="@+id/avatar_portfoli"
+        android:layout_width="221dp"
+        android:layout_height="222dp"
+        android:background="@drawable/avatar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.196" />
 
     <TextView
         android:id="@+id/tvportfoli"
@@ -38,5 +43,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
 
+    <EditText
+        android:id="@+id/etDescripcioPortfoli"
+        android:layout_width="345dp"
+        android:layout_height="195dp"
+        android:layout_marginBottom="124dp"
+        android:hint="Introdueix una descripció"
+        android:textAlignment="center"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/avatar_portfoli"
+        app:layout_constraintVertical_bias="0.977" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
