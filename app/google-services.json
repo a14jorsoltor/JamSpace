@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "614712021194",
-    "project_id": "projecte-fi-curs",
-    "storage_bucket": "projecte-fi-curs.appspot.com"
+    "project_number": "324173423822",
+    "project_id": "jamspacedb",
+    "storage_bucket": "jamspacedb.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:614712021194:android:17089356952a34c95be433",
+        "mobilesdk_app_id": "1:324173423822:android:f6140d02a39b825674dc9f",
         "android_client_info": {
           "package_name": "com.example.login"
         }
       },
       "oauth_client": [
         {
-          "client_id": "614712021194-ocis48468j873bj9v0jv4lguts4hqifu.apps.googleusercontent.com",
+          "client_id": "324173423822-1tlhel1p8fpa10282q4ncq8gbvhs1ho7.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCeWGHgxT0qslWsWLjrcexBtTWTjG6_95g"
+          "current_key": "AIzaSyDIev9NQFcNaPZSmWMSI_x7Dcg5TLIKnPc"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "614712021194-ocis48468j873bj9v0jv4lguts4hqifu.apps.googleusercontent.com",
+              "client_id": "324173423822-1tlhel1p8fpa10282q4ncq8gbvhs1ho7.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
