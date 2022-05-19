@@ -13,16 +13,19 @@
         android:text="Decripcio del Joc"
         app:layout_constraintBottom_toTopOf="@+id/etDescripcioDelJoc"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.757" />
 
     <EditText
         android:id="@+id/etDescripcioDelJoc"
-        android:layout_width="231dp"
-        android:layout_height="193dp"
-        android:layout_marginTop="72dp"
+        android:layout_width="237dp"
+        android:layout_height="116dp"
+        android:layout_marginTop="152dp"
         android:ems="10"
         android:gravity="start|top"
+        android:hint="Descripcio del joc"
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,10 +35,10 @@
         android:id="@+id/tvIconUpload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="8dp"
         android:text="Pujar icona del joc"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etDescripcioDelJoc" />
 
@@ -68,9 +71,49 @@
         android:layout_height="214dp"
         app:layout_constraintBottom_toTopOf="@+id/tvGameUpload"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvIconUpload"
+        app:layout_constraintVertical_bias="0.137"
         tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tvNomJoc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nom del joc"
+        app:layout_constraintBottom_toTopOf="@+id/etNomJoc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.28" />
+
+    <EditText
+        android:id="@+id/etNomJoc"
+        android:layout_width="232dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="20dp"
+        android:ems="10"
+        android:hint="Nom del joc"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/tvDescripcioJoc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.527"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:onClick="PujarJocFirebase"
+
+        android:id="@+id/btPujarJoc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pujar Joc"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvGameFileRute"
+        tools:ignore="OnClick" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,9 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="350dp"
+    android:layout_height="400dp"
     android:orientation="vertical"
     android:padding="6dp">
+
+    <TextView
+        android:id="@+id/tvNomJocPP"
+        android:layout_width="166dp"
+        android:layout_height="30dp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tvNomUserPP"
+        android:layout_width="166dp"
+        android:layout_height="30dp"
+        android:text="TextView"
+        android:textAlignment="viewStart" />
 
     <ImageView
         android:id="@+id/ivImatgePostPP"

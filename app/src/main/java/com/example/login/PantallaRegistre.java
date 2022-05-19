@@ -114,26 +114,6 @@ public class PantallaRegistre extends AppCompatActivity {
             getIdDoc(db, "id");
 
 
-            Map<String, Object> usuari = new HashMap<>();
-            usuari.put("id", ++id);
-            usuari.put("username", nomUsuari.getText().toString());
-            usuari.put("userMail", correuUsuari.getText().toString());
-            // Add a new document with a generated ID
-            db.collection("Usuaris").document("usuari " + id)
-                    .set(usuari)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Log.d(LOG_TAG, "DocumentSnapshot successfully written!");
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.w(LOG_TAG, "Error writing document", e);
-                        }
-                    });
-
         }
 
     }
@@ -207,13 +187,34 @@ public class PantallaRegistre extends AppCompatActivity {
 
         CollectionReference lastDoc = db.collection("Usuaris");
 
-        lastDoc.orderBy("ID", Query.Direction.DESCENDING).limit(1).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+
+        lastDoc.orderBy("id", Query.Direction.DESCENDING).limit(1).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        id = (Long) document.get(idNom);
+                        id = (Long) document.get("id");
 
+                        Map<String, Object> usuari = new HashMap<>();
+                        usuari.put("id", ++id);
+                        usuari.put("username", nomUsuari.getText().toString());
+                        usuari.put("userMail", correuUsuari.getText().toString());
+                        // Add a new document with a generated ID
+                        db.collection("Usuaris").document("usuari " + id)
+                                .set(usuari)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Log.d(LOG_TAG, "DocumentSnapshot successfully written!");
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w(LOG_TAG, "Error writing document", e);
+                                    }
+                                });
                     }
                 } else {
                     Log.w(LOG_TAG, "Error getting documents.", task.getException());
