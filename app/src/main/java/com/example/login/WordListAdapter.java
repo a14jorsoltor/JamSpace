@@ -83,6 +83,7 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
 
 
         StorageReference photoReference= storageRef.child("imagesPost/"+ComNomImge);
+        Log.d("LOG_TAG", ">>>>>>>>>>>>>>>>>>>>>>>>>gdyh>>>>>>>>>>>" + photoReference);
 
         final long ONE_MEGABYTE = 1024 * 1024;
         photoReference.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {

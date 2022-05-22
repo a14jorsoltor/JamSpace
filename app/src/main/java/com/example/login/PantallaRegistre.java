@@ -154,15 +154,6 @@ public class PantallaRegistre extends AppCompatActivity {
 
                         }
                     });
-
-
-
-
-
-
-
-
-
         }
     }
 
@@ -197,6 +188,8 @@ public class PantallaRegistre extends AppCompatActivity {
                         id = (Long) document.get("id");
 
                         Map<String, Object> usuari = new HashMap<>();
+                        usuari.put("descripcio", "");
+                        usuari.put("nomFoto", "");
                         usuari.put("id", ++id);
                         usuari.put("username", nomUsuari.getText().toString());
                         usuari.put("userMail", correuUsuari.getText().toString());

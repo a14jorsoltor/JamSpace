@@ -43,7 +43,7 @@ public class PantallaPrincipal extends AppCompatActivity {
 
 
     public void cvPortfoli(View view) {
-        Intent switchActivityIntent = new Intent(this, Portfoli.class);
+        Intent switchActivityIntent = new Intent(this, ViewPortfoli.class);
         startActivity(switchActivityIntent);
     }
 

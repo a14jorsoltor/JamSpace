@@ -10,10 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Login">
         <activity
-            android:name=".PostEditor"
+            android:name=".ViewPortfoli"
             android:exported="true" />
         <activity
-            android:name=".Portfoli"
+            android:name=".Edit_portfoli"
+            android:exported="true" />
+        <activity
+            android:name=".PostEditor"
             android:exported="true" />
         <activity
             android:name=".PantallaRegistre"
