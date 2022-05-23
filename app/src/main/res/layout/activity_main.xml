@@ -7,70 +7,74 @@
     tools:context=".MainActivity"
     >
 
-    <TextView
-        android:id="@+id/tvTtiolApp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="104dp"
-        android:text="MI APP"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
 
     <EditText
         android:id="@+id/etCorreuLogin"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="132dp"
-        android:hint="Correu"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="36dp"
         android:drawableStart="@drawable/ic_email"
         android:drawablePadding="12dp"
+        android:hint="Correu"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTtiolApp" />
-
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
         android:id="@+id/etContrasenyain"
-        android:layout_width="200dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="72dp"
-        android:hint="Contrasenya"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="40dp"
         android:drawableStart="@drawable/ic_lock"
         android:drawablePadding="12dp"
+        android:hint="Contrasenya"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etCorreuLogin" />
 
     <Button
         android:id="@+id/btLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
         android:layout_marginTop="92dp"
+        android:background="@drawable/custombuttons"
         android:onClick="login"
         android:text="login"
+        app:backgroundTint="#932CCA"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etContrasenyain" />
+
+    <Button
+        android:id="@+id/btRegiter"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="196dp"
+        android:background="@drawable/custombuttons"
+        android:onClick="registre"
+        app:backgroundTint="#932CCA"
+        android:text="Registra't"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etContrasenyain"
         tools:ignore="OnClick" />
 
-    <Button
-        android:id="@+id/btRegiter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="196dp"
-        android:text="Registra't"
-        android:onClick="registre"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="288dp"
+        android:layout_height="219dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etContrasenyain"
-        tools:ignore="OnClick" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/jam_space" />
 </androidx.constraintlayout.widget.ConstraintLayout>

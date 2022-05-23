@@ -12,6 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Guardar Configuracio"
+        android:background="@drawable/custombuttons"
+        app:backgroundTint="#932CCA"
         android:onClick="cvViewPerfil"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.462"
@@ -44,29 +46,29 @@
             android:layout_margin="10dp"
             android:contentDescription="@string/app_name" />
     </androidx.cardview.widget.CardView>
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="231dp"
-        android:layout_height="63dp"
-        android:layout_marginTop="68dp"
-        android:text="JamSpace"
-        android:textAlignment="center"
-        android:textSize="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/textView"
+        android:layout_width="224dp"
+        android:layout_height="124dp"
+        android:layout_marginTop="92dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/jam_space" />
 
 
     <EditText
         android:id="@+id/etNomUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="24dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Nom d'usuari"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
@@ -74,16 +76,16 @@
         android:id="@+id/etDescripcioPortfoli"
         android:layout_width="225dp"
         android:layout_height="174dp"
-        android:layout_marginTop="84dp"
         android:ems="10"
         android:gravity="start|top"
         android:hint="Descripció"
         android:inputType="textMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etNomUser"
-        app:layout_constraintVertical_bias="0.054" />
+        app:layout_constraintVertical_bias="0.464" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

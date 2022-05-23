@@ -39,6 +39,8 @@
         android:layout_height="55dp"
         android:layout_marginBottom="8dp"
         android:onClick="cvEditPost"
+        android:background="@drawable/custombuttons"
+        app:backgroundTint="#932CCA"
         android:text="Posar nou post"
         app:layout_constraintBottom_toTopOf="@+id/recyclerview"
         app:layout_constraintEnd_toEndOf="parent"
