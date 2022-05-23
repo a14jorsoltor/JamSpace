@@ -160,6 +160,7 @@ public class PostEditor extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d(LOG_TAG, "DocumentSnapshot successfully written!");
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -168,6 +169,9 @@ public class PostEditor extends AppCompatActivity {
                         Log.w(LOG_TAG, "Error writing document", e);
                     }
                 });
+
+        Intent switchActivityIntent = new Intent(this, PantallaPrincipal.class);
+        startActivity(switchActivityIntent);
     }
 
 

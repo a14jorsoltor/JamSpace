@@ -107,7 +107,8 @@ public class ViewPortfoli extends AppCompatActivity {
             public void onFailure(@NonNull Exception exception) {
                 // Handle any errors
             }
-        });    }
+        });
+    }
 
 
     private void setUp() {
