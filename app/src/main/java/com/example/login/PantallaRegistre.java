@@ -38,7 +38,7 @@ public class PantallaRegistre extends AppCompatActivity {
 
 
     private static final String LOG_TAG = null;
-    long id = 0;
+    String id = "0";
     TextView msgError;
     EditText nomUsuari, correuUsuari, pswUsuari;
 
@@ -185,16 +185,16 @@ public class PantallaRegistre extends AppCompatActivity {
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
-                        id = (Long) document.get("id");
-
+                        id =  document.getData().get("id").toString();
+                        int id2 = Integer.parseInt(id);
                         Map<String, Object> usuari = new HashMap<>();
                         usuari.put("descripcio", "");
                         usuari.put("nomFoto", "");
-                        usuari.put("id", ++id);
+                        usuari.put("id", ++id2);
                         usuari.put("username", nomUsuari.getText().toString());
                         usuari.put("userMail", correuUsuari.getText().toString());
                         // Add a new document with a generated ID
-                        db.collection("Usuaris").document("usuari " + id)
+                        db.collection("Usuaris").document("usuari " + ++id2)
                                 .set(usuari)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
