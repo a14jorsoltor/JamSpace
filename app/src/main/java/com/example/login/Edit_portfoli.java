@@ -166,7 +166,7 @@ public class Edit_portfoli extends AppCompatActivity {
         usuari.put("nomFoto", mAuth.getCurrentUser().getEmail().replace("@", "2") + "image");
         usuari.put("id", getIDuser());
         usuari.put("username", etNomUser.getText().toString());
-        usuari.put("usermail", mAuth.getCurrentUser().getEmail());
+        usuari.put("userMail", mAuth.getCurrentUser().getEmail());
         usuari.put("nomJocFile", getNomJocFile());
 
         // Add a new document with a generated ID
