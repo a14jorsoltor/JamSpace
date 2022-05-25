@@ -37,6 +37,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Descarregar joc"
+        android:background="@drawable/custombuttons"
+        app:backgroundTint="#932CCA"
         android:onClick="descJoc"
         tools:ignore="OnClick" />
 

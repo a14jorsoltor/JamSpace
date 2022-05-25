@@ -10,14 +10,14 @@
         android:id="@+id/btEditPerf"
         android:layout_width="250dp"
         android:layout_height="60dp"
-        android:layout_marginTop="16dp"
-        android:text="Editar perfil"
+        android:layout_marginTop="32dp"
         android:background="@drawable/custombuttons"
+        android:onClick="cvEditPerfil"
+        android:text="Pantalla principal"
         app:backgroundTint="#932CCA"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.462"
+        app:layout_constraintHorizontal_bias="0.422"
         app:layout_constraintStart_toStartOf="parent"
-        android:onClick="cvEditPerfil"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="OnClick" />
 
@@ -46,6 +46,7 @@
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:contentDescription="@string/app_name" />
+
     </androidx.cardview.widget.CardView>
 
 
@@ -62,8 +63,8 @@
 
     <TextView
         android:id="@+id/tvNomUserView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="280dp"
+        android:layout_height="27dp"
         android:layout_marginTop="44dp"
         android:ems="10"
         android:hint="Nom d'usuari"
@@ -77,8 +78,8 @@
 
     <TextView
         android:id="@+id/tvDescripcioView"
-        android:layout_width="225dp"
-        android:layout_height="174dp"
+        android:layout_width="284dp"
+        android:layout_height="111dp"
         android:layout_marginBottom="8dp"
         android:ems="10"
         android:gravity="start|top"
@@ -86,9 +87,23 @@
         android:inputType="textMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView"
-        app:layout_constraintVertical_bias="0.811" />
+        app:layout_constraintVertical_bias="0.538" />
 
-
+    <Button
+        android:id="@+id/btcvPP"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:background="@drawable/custombuttons"
+        android:onClick="cvPantallaPrincipal"
+        android:text="Editar perfil"
+        app:backgroundTint="#932CCA"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescripcioView"
+        app:layout_constraintVertical_bias="0.483"
+        tools:ignore="OnClick" />
 </androidx.constraintlayout.widget.ConstraintLayout>

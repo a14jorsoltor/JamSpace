@@ -49,10 +49,7 @@ public class Edit_portfoli extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     String nomUser, nomFoto = "", IDuser, nomJocFile="";
 
-    private String userId;
-    private StorageReference storageRef;
-    private DatabaseReference databaseRef;
-    private Context mContext;
+
 
     public String getIDuser() {
         return IDuser;
@@ -220,7 +217,7 @@ public class Edit_portfoli extends AppCompatActivity {
     private void fetchID() {
 
         db.collection("Usuaris")
-                .whereEqualTo("usermail", mAuth.getCurrentUser().getEmail())
+                .whereEqualTo("userMail", mAuth.getCurrentUser().getEmail())
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {

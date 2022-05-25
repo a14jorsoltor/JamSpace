@@ -123,4 +123,10 @@ public class ViewPortfoli extends AppCompatActivity {
         startActivity(switchActivityIntent);
 
     }
+    public void cvPantallaPrincipal(View view) {
+        Intent switchActivityIntent = new Intent(this, PantallaPrincipal.class);
+        startActivity(switchActivityIntent);
+
+    }
+
 }

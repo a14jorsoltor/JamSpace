@@ -70,7 +70,7 @@
         android:layout_height="43dp"
         android:textSize="30dp"
         android:textAlignment="center"
-        android:text="hola"
+        android:text="Carregant..."
         android:layout_marginTop="24dp"
 
         app:layout_constraintBottom_toTopOf="@+id/upload"

@@ -59,7 +59,6 @@ public class PantallaPrincipal extends AppCompatActivity {
         setContentView(R.layout.activity_pantalla_principal);
         Toast.makeText(getApplicationContext(),"Pantalla principal",Toast.LENGTH_SHORT).show();
 
-
         GeneratePosts(this);
 
 
@@ -73,8 +72,10 @@ public class PantallaPrincipal extends AppCompatActivity {
 
         nomUser = findViewById(R.id.nomCurrUserPPsdf);
         fotoUser = findViewById(R.id.fotoPerfilPP);
+
+
         db.collection("Usuaris")
-                .whereEqualTo("usermail",  mAuth.getCurrentUser().getEmail())
+                .whereEqualTo("userMail",  mAuth.getCurrentUser().getEmail())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -83,7 +84,7 @@ public class PantallaPrincipal extends AppCompatActivity {
                         if (task.isSuccessful()) {
 
                             for (QueryDocumentSnapshot document : task.getResult()) {
-
+                                Log.d("","-------------------------------------------" + document.getData().get("username").toString());
                                 nomUser.setText(document.getData().get("username").toString());
                                 ficarFoto(document.getData().get("nomFoto").toString());
                             }
@@ -166,8 +167,9 @@ public class PantallaPrincipal extends AppCompatActivity {
                                 }
                             }
 
-
                             cargarPortfoli();
+
+
                             // Get a handle to the RecyclerView.
                             mRecyclerView = findViewById(R.id.recyclerview);
                             // Create an adapter and supply the data to be displayed.
