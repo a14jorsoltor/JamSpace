@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.storage.FirebaseStorage;
@@ -25,9 +28,16 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicReference;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 public class Edit_portfoli extends AppCompatActivity {
     private static final String LOG_TAG = "";
@@ -37,7 +47,12 @@ public class Edit_portfoli extends AppCompatActivity {
     ImageView imgProfileEdit;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    String nomUser, nomFoto = "", IDuser;
+    String nomUser, nomFoto = "", IDuser, nomJocFile="";
+
+    private String userId;
+    private StorageReference storageRef;
+    private DatabaseReference databaseRef;
+    private Context mContext;
 
     public String getIDuser() {
         return IDuser;
@@ -77,6 +92,8 @@ public class Edit_portfoli extends AppCompatActivity {
         storageReference = storage.getReference();
         fetchUserName();
         imgProfileEdit.setOnClickListener(v -> choosePicture());
+
+
 
     }
 
@@ -153,6 +170,8 @@ public class Edit_portfoli extends AppCompatActivity {
         usuari.put("id", getIDuser());
         usuari.put("username", etNomUser.getText().toString());
         usuari.put("usermail", mAuth.getCurrentUser().getEmail());
+        usuari.put("nomJocFile", getNomJocFile());
+
         // Add a new document with a generated ID
         db.collection("Usuaris" ).document("usuari " + getIDuser())
                 .set(usuari)
@@ -169,6 +188,10 @@ public class Edit_portfoli extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    private String getNomJocFile() {
+        return nomJocFile;
     }
 
 
@@ -188,6 +211,10 @@ public class Edit_portfoli extends AppCompatActivity {
                 });
 
 
+    }
+
+    private void setNomJocFile(String nomJocFile) {
+        this.nomJocFile = nomJocFile;
     }
 
     private void fetchID() {

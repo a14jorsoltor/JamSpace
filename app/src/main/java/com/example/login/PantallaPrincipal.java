@@ -1,6 +1,7 @@
 package com.example.login;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -8,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -23,10 +26,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class PantallaPrincipal extends AppCompatActivity {
@@ -41,7 +48,7 @@ public class PantallaPrincipal extends AppCompatActivity {
 
     int numPosts =0 ;
 
-    String DecJoc, NomFoto, NomUser , nomJoc;
+    String DecJoc, NomFoto, NomUser , nomJoc, nomFileJoc;
     int id;
     ArrayList<Post> posts = new ArrayList<>();
 
@@ -104,6 +111,28 @@ public class PantallaPrincipal extends AppCompatActivity {
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void descJoc(View View) throws IOException {
+        storageRef = storageRef.child("gamePosts/" + nomJoc + "file");
+
+        File downloadFolder = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
+        Path ruta = downloadFolder.toPath();
+        final File localFile = new File(ruta.toString(), nomJoc+".zip");
+
+
+        storageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+            Log.d("", "Arxiu Creat a" +localFile.getAbsolutePath());
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+            }
+        });
+    }
+
     public void cvPortfoli(View view) {
         Intent switchActivityIntent = new Intent(this, ViewPortfoli.class);
         startActivity(switchActivityIntent);
@@ -124,14 +153,17 @@ public class PantallaPrincipal extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                DecJoc = document.get("DecJoc").toString() ;
-                                NomFoto =document.get("NomFoto").toString() ;
-                                NomUser =document.get("NomUser").toString() ;
                                 id = Integer.parseInt(document.get("id").toString());
-                                nomJoc=document.get("nomJoc").toString() ;
-                                Post post = new Post(DecJoc, NomFoto,NomUser,id,nomJoc );
-                                posts.add(post);
-                                numPosts++;
+                                if(id!=0){
+                                    DecJoc = document.get("DecJoc").toString();
+                                    NomFoto = document.get("NomFoto").toString();
+                                    NomUser = document.get("NomUser").toString();
+                                    nomJoc = document.get("nomJoc").toString();
+                                    nomFileJoc = document.get("nomFileJoc").toString();
+                                    Post post = new Post(DecJoc, NomFoto, NomUser, id, nomJoc, nomFileJoc);
+                                    posts.add(post);
+                                    numPosts++;
+                                }
                             }
 
 

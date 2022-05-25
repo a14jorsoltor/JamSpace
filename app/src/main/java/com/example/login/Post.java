@@ -2,12 +2,13 @@ package com.example.login;
 
 public class Post {
 
-    public Post(String decJoc, String nomFoto, String nomUser, int id, String nomJoc) {
-        DecJoc = decJoc;
-        NomFoto = nomFoto;
-        NomUser = nomUser;
+    public Post(String decJoc, String nomFoto, String nomUser, int id, String nomJoc, String NomFitxJoc) {
+        this.DecJoc = decJoc;
+        this.NomFoto = nomFoto;
+        this.NomUser = nomUser;
         this.id = id;
         this.nomJoc = nomJoc;
+        this.NomFitxJoc = NomFitxJoc;
     }
 
     String DecJoc;
@@ -15,6 +16,7 @@ public class Post {
     String NomUser;
     int id;
     String nomJoc;
+    String NomFitxJoc;
 
     public String getDecJoc() {
         return DecJoc;

@@ -193,8 +193,9 @@ public class PantallaRegistre extends AppCompatActivity {
                         usuari.put("id", ++id2);
                         usuari.put("username", nomUsuari.getText().toString());
                         usuari.put("userMail", correuUsuari.getText().toString());
+
                         // Add a new document with a generated ID
-                        db.collection("Usuaris").document("usuari " + ++id2)
+                        db.collection("Usuaris").document("usuari " + id2)
                                 .set(usuari)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override

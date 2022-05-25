@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -49,12 +50,30 @@ public class PostEditor extends AppCompatActivity {
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     public EditText nomJoc, descJoc;
-    public Uri imageUri;
+    TextView tvGameFileRute;
+    public Uri imageUri, fileUri;
     private FirebaseStorage storage;
     private StorageReference storageReference;
     public ImageView iconGame;
+    String nomFitxer;
     long id=0;
+    boolean pujarFoto = false, pujarFitxer = false;
 
+    public boolean isPujarFoto() {
+        return pujarFoto;
+    }
+
+    public void setPujarFoto(boolean pujarFoto) {
+        this.pujarFoto = pujarFoto;
+    }
+
+    public boolean isPujarFitxer() {
+        return pujarFitxer;
+    }
+
+    public void setPujarFitxer(boolean pujarFitxer) {
+        this.pujarFitxer = pujarFitxer;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +81,7 @@ public class PostEditor extends AppCompatActivity {
         setContentView(R.layout.activity_post_editor);
 
 
-
+        tvGameFileRute = findViewById(R.id.tvGameFileRute);
         iconGame = findViewById(R.id.iconeJoc);
         nomJoc = findViewById(R.id.etNomJoc);
         descJoc = findViewById(R.id.etDescripcioDelJoc);
@@ -70,10 +89,23 @@ public class PostEditor extends AppCompatActivity {
         storageReference = storage.getReference();
         fetchUserName();
         iconGame.setOnClickListener(v -> choosePicture());
+        tvGameFileRute.setOnClickListener(view -> chooseFile());
+    }
+
+    private void chooseFile() {
+        setPujarFitxer(true);
+        setPujarFoto(false);
+        Intent intent = new Intent();
+        intent.setType("file/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, 1);
+
 
     }
 
     private void choosePicture() {
+        setPujarFitxer(false);
+        setPujarFoto(true);
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -84,12 +116,49 @@ public class PostEditor extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            imageUri = data.getData();
-            iconGame.setImageURI(imageUri);
-
-
-            uploadPicture();
+            if(isPujarFoto()) {
+                imageUri = data.getData();
+                iconGame.setImageURI(imageUri);
+                uploadPicture();
+            }else if (isPujarFitxer()){
+                fileUri = data.getData();
+                uploadFile();
+            }
         }
+    }
+
+
+
+
+    private void uploadFile(){
+        final ProgressDialog pd = new ProgressDialog(this);
+        pd.setTitle("Pujant fitxer....");
+        pd.show();
+        nomFitxer = nomJoc.getText().toString() + "file";
+        StorageReference riversRef = storageReference.child("gamePosts/" + nomJoc.getText().toString() + "file");
+        riversRef.putFile(fileUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        pd.dismiss();
+                        // Get a URL to the uploaded content
+                        Snackbar.make(findViewById(android.R.id.content), "fitxer pujada", Snackbar.LENGTH_LONG).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        pd.dismiss();
+                        Toast.makeText(getApplicationContext(), "Pujada fallida", Toast.LENGTH_LONG).show();
+                    }
+                })
+                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                        double progresPercent = (100.00 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
+                        pd.setMessage("Percent: " + (int) progresPercent + "%");
+                    }
+                });
     }
 
     private void uploadPicture() {
@@ -133,7 +202,7 @@ public class PostEditor extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                              setRetorn( document.getData().values().toArray()[2].toString());
+                              setRetorn( document.getData().get("username").toString());
                             }
                         } else {
                             Log.d(LOG_TAG, "Error getting documents: ", task.getException());
@@ -153,6 +222,7 @@ public class PostEditor extends AppCompatActivity {
         post.put("DecJoc", descJoc.getText().toString());
         post.put("NomFoto",  nomJoc.getText().toString() + getRetorn());
         post.put("NomUser",  getRetorn());
+        post.put("nomFileJoc", nomFitxer);
     // Add a new document with a generated ID
         db.collection("Posts").document("post " + id)
                 .set(post)

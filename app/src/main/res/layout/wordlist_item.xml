@@ -22,8 +22,8 @@
 
     <ImageView
         android:id="@+id/ivImatgePostPP"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_width="397dp"
+        android:layout_height="162dp"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -31,4 +31,13 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:text="TextView" />
+
+    <Button
+        android:id="@+id/btDescJoc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Descarregar joc"
+        android:onClick="descJoc"
+        tools:ignore="OnClick" />
+
 </LinearLayout>
