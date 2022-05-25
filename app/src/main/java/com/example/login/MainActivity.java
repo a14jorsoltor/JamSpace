@@ -38,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "Pantalla Login", Toast.LENGTH_SHORT).show();
 
         setUp();
-
-
     }
 
     private void setUp() {

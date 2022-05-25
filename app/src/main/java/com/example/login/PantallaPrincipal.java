@@ -80,11 +80,8 @@ public class PantallaPrincipal extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-
                         if (task.isSuccessful()) {
-
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d("","-------------------------------------------" + document.getData().get("username").toString());
                                 nomUser.setText(document.getData().get("username").toString());
                                 ficarFoto(document.getData().get("nomFoto").toString());
                             }
