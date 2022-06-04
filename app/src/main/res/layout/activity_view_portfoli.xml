@@ -64,7 +64,7 @@
     <TextView
         android:id="@+id/tvNomUserView"
         android:layout_width="280dp"
-        android:layout_height="27dp"
+        android:layout_height="48dp"
         android:layout_marginTop="44dp"
         android:ems="10"
         android:hint="Nom d'usuari"
