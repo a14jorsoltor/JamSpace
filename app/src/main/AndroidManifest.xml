@@ -10,21 +10,44 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Login">
+
         <activity
-            android:name=".ViewPortfoli"
-            android:exported="true" />
+            android:name="com.example.login.PantallaRegistre"
+            android:parentActivityName="com.example.login.MainActivity" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.login.MainActivity" />
+        </activity>
         <activity
-            android:name=".Edit_portfoli"
-            android:exported="true" />
+            android:name="com.example.login.PantallaPrincipal"
+            android:parentActivityName="com.example.login.MainActivity" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.login.MainActivity" />
+        </activity>
         <activity
-            android:name=".PostEditor"
-            android:exported="true" />
+            android:name="com.example.login.Edit_portfoli"
+            android:parentActivityName="com.example.login.ViewPortfoli" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.login.ViewPortfoli" />
+        </activity>
         <activity
-            android:name=".PantallaRegistre"
-            android:exported="true" />
-        <activity
-            android:name=".PantallaPrincipal"
-            android:exported="true" />
+            android:name="com.example.login.ViewPortfoli"
+            android:parentActivityName="com.example.login.PantallaPrincipal" >
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.login.PantallaPrincipal" />
+        </activity>
+
         <activity
             android:name=".MainActivity"
             android:exported="true">

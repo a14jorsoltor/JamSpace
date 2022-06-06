@@ -35,19 +35,20 @@
 
     <Button
         android:id="@+id/upload"
-        android:layout_width="188dp"
+        android:layout_width="133dp"
         android:layout_height="55dp"
         android:layout_marginBottom="8dp"
-        android:onClick="cvEditPost"
         android:background="@drawable/custombuttons"
-        app:backgroundTint="#932CCA"
+        android:onClick="cvEditPost"
         android:text="Posar nou post"
+        app:backgroundTint="#932CCA"
         app:layout_constraintBottom_toTopOf="@+id/recyclerview"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.439"
+        app:layout_constraintHorizontal_bias="0.102"
         app:layout_constraintStart_toEndOf="@+id/cardView2"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
@@ -79,6 +80,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="113dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="72dp"
+        android:background="@drawable/custombuttons"
+        android:onClick="logout"
+        android:text="LogOut"
+        app:backgroundTint="#932CCA"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/upload"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="OnClick" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -185,6 +185,9 @@ public class PantallaPrincipal extends AppCompatActivity {
     }
 
 
-
-
+    public void logout(View view) {
+        mAuth.signOut();
+        Intent switchActivityIntent = new Intent(this, MainActivity.class);
+        startActivity(switchActivityIntent);
+    }
 }
