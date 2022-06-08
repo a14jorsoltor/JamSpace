@@ -191,7 +191,8 @@ public class Edit_portfoli extends AppCompatActivity {
                 });
         dadesModel newModel = new dadesModel(mAuth.getCurrentUser().getEmail().replace("@", "2") + "image", etDescripcioPortfoli.getText().toString(), etNomUser.getText().toString(), mAuth.getCurrentUser().getEmail(),Integer.parseInt(getIDuser()));
         //Update taules labs
-        controlDades.dadesControlUp(newModel);
+
+        controlDades.dadesControlUp(newModel, mAuth.getCurrentUser().getEmail());
     }
 
     private String getNomJocFile() {
