@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.login.conexioLabs.dadesControl;
+import com.example.login.conexioLabs.dadesModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -25,6 +27,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,7 +38,7 @@ public class PantallaRegistre extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private boolean goodCredentials = false;
 
-
+    dadesControl controlDades;
 
     private static final String LOG_TAG = null;
     String id = "0";
@@ -92,7 +95,7 @@ public class PantallaRegistre extends AppCompatActivity {
      * Funcio per fe el registre de la persona
      * @param view
      */
-    public void Register(View view) {
+    public void Register(View view) throws SQLException {
 
         if (nomUsuari.getText().toString().equals("") || correuUsuari.getText().toString().equals("") || pswUsuari.getText().toString().equals("")) {
             msgError.setText("");
@@ -173,7 +176,7 @@ public class PantallaRegistre extends AppCompatActivity {
      * @param db
      * @param idNom
      */
-    public void getIdDoc(FirebaseFirestore db, String idNom) {
+    public void getIdDoc(FirebaseFirestore db, String idNom) throws SQLException {
 
 
         CollectionReference lastDoc = db.collection("Usuaris");
@@ -216,7 +219,9 @@ public class PantallaRegistre extends AppCompatActivity {
 
             }
         });
-
+        //Insert taules labs
+        dadesModel newModel = new dadesModel("", "", nomUsuari.getText().toString(), correuUsuari.getText().toString(),Integer.parseInt(id+1));
+        controlDades.insertar(newModel);
     }
 
 

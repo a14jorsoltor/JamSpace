@@ -12,6 +12,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -28,6 +30,9 @@ import com.squareup.picasso.Picasso;
 public class ViewPortfoli extends AppCompatActivity {
     String nomFoto;
 
+
+
+
     public String getNomFoto() {
         return nomFoto;
     }
@@ -37,9 +42,12 @@ public class ViewPortfoli extends AppCompatActivity {
     }
 
     ImageView imgProfileEdit;
+
     TextView tvNomUserView, tvDescripcioView;
     private static final String LOG_TAG ="" ;
+
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef =  storage.getReference();
@@ -50,12 +58,10 @@ public class ViewPortfoli extends AppCompatActivity {
         setContentView(R.layout.activity_view_portfoli);
         
         setUp();
-        posarDades();
-    }
-
-    private void posarDades() {
         fetchUserName();
     }
+
+
 
 
     private void fetchUserName() {
@@ -66,25 +72,14 @@ public class ViewPortfoli extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-
                         if (task.isSuccessful()) {
-
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 tvNomUserView.setText(document.getData().get("username").toString());
                                 tvDescripcioView.setText(document.getData().get("descripcio").toString());
                                 setNomFoto(document.getData().get("nomFoto").toString());
 
-
-
-
-
                             }
-
                             ficarFoto();
-
-
-
-
                         } else {
                             Log.d(LOG_TAG, "Error getting documents: ", task.getException());
                         }

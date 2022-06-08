@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.login.conexioLabs.dadesControl;
+import com.example.login.conexioLabs.dadesModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
@@ -33,6 +35,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +51,7 @@ public class Edit_portfoli extends AppCompatActivity {
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     String nomUser, nomFoto = "", IDuser, nomJocFile="";
+    dadesControl controlDades;
 
 
 
@@ -145,7 +149,7 @@ public class Edit_portfoli extends AppCompatActivity {
     }
 
 
-    public void cvViewPerfil(View view) {
+    public void cvViewPerfil(View view) throws SQLException {
         Log.d(LOG_TAG, etNomUser.getText().toString() + " " +  etDescripcioPortfoli.getText().toString()+" " +getNomFoto().equals("") );
         if (etNomUser.getText().toString().equals(null) && etDescripcioPortfoli.getText().toString().equals(null) && getNomFoto().equals("")) {
             Toast.makeText(getApplicationContext(), "Omple els camps", Toast.LENGTH_SHORT).show();
@@ -160,7 +164,8 @@ public class Edit_portfoli extends AppCompatActivity {
 
     }
 
-    private void guardarInfo() {
+    private void guardarInfo() throws SQLException {
+
         Map<String, Object> usuari = new HashMap<>();
         usuari.put("descripcio", etDescripcioPortfoli.getText().toString());
         usuari.put("nomFoto", mAuth.getCurrentUser().getEmail().replace("@", "2") + "image");
@@ -184,7 +189,9 @@ public class Edit_portfoli extends AppCompatActivity {
                         Log.w(LOG_TAG, "Error writing document", e);
                     }
                 });
-
+        dadesModel newModel = new dadesModel(mAuth.getCurrentUser().getEmail().replace("@", "2") + "image", etDescripcioPortfoli.getText().toString(), etNomUser.getText().toString(), mAuth.getCurrentUser().getEmail(),Integer.parseInt(getIDuser()));
+        //Update taules labs
+        controlDades.dadesControlUp(newModel);
     }
 
     private String getNomJocFile() {
