@@ -11,15 +11,16 @@ public class Obrir_Tancar_BD {
     public static final String URL = "jdbc:mysq l://localhost:3306/pruebajava";
     public static final String USER = "root";
     public static final String CLAVE = "";
+    public static final String DRIVER = "mysql-connector-java-8.0.18.jar";
 
 
     public Connection conexioBase(Connection connection) {
 
         try {
-
+            Class.forName(DRIVER);
             connection = DriverManager.getConnection(URL, USER, CLAVE);
             System.out.println("Connecio realitzada usant" + "DriverManager");
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return connection;
