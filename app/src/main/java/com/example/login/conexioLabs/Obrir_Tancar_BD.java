@@ -8,9 +8,9 @@ public class Obrir_Tancar_BD {
 
 
 
-    public static final String URL = "jdbc:mysq l://localhost:3306/pruebajava";
-    public static final String USER = "root";
-    public static final String CLAVE = "";
+    public static final String URL = "jdbc:mysql://labs.inspedralbes.cat:3306/a20sersancor_jamspacedb?serverTimezone=UTC";
+    public static final String USER = "a20sersancor_jamspacedb";
+    public static final String CLAVE = "Jamspace1";
     public static final String DRIVER = "mysql-connector-java-8.0.18.jar";
 
 
@@ -19,7 +19,7 @@ public class Obrir_Tancar_BD {
         try {
             Class.forName(DRIVER);
             connection = DriverManager.getConnection(URL, USER, CLAVE);
-            System.out.println("Connecio realitzada usant" + "DriverManager");
+            System.out.println("Connexio realitzada usant" + "DriverManager");
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
